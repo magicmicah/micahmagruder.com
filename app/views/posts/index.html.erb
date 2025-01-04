@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+<% if authenticated? %>
+  <%= link_to "New post", new_post_path %>
+<% end %>
+
+<% if @search_query.present? %>
+  <h3><%= @search_results %> Search Results for "<%= @search_query %>"</h3>
+  <% if @posts.any? %>
+    <div id="posts">
+      <% @posts.each do |post| %>
+        <div class='card'>
+          <div class='post-content'>
+            <%= render post %>
+            <%= rich_text_preview_words(post, 50) %>
+            <%= link_to 'Read More', post_path(post) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No results found for "<%= @search_query %>".</p>
+  <% end %>
+<% else %>
+  <div id="posts">
+    <% @posts.each do |post| %>
+      <div class='card'>
+        <div class='post-content'>
+          <%= render post %>
+          <%= rich_text_preview_words(post, 50) %>
+          <%= link_to 'Read More', post_path(post) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="pagination">
+  <%= paginate @posts %>
+</div>

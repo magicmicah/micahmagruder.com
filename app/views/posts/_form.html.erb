@@ -1,0 +1,43 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.rich_text_area :body %>
+  </div>
+
+  <div>
+    <%= form.label :tag_names, "Tags (comma-separated)" %>
+    <%= form.text_field :tag_names, value: @post.tags.map(&:name).join(', ') %>
+  </div>
+
+  <div>
+    <%= form.label :visible, style: "display: block" %>
+    <%= form.checkbox :visible %>
+  </div>
+
+  <div>
+    <%= form.label :published_on, style: "display: block" %>
+    <%= form.date_field :published_on, value: form.object.published_on || Date.today %>
+  </div>
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

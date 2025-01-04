@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= link_to "Back to posts", posts_path %>
+
+<% if authenticated? %>
+<%= link_to "Edit this post", edit_post_path(@post) %> |
+<%= button_to "Destroy this post", @post, method: :delete %>
+<% end %>
+<%= render @post %>
+    <div>
+      <%= @post.body %>
+    </div>
+<div>
+
+</div>

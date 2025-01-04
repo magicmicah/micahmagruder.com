@@ -1,0 +1,12 @@
+<div class="post-content" id="<%= dom_id post %>">
+
+  <h2 class="post-title"><%= post.title %></h2>
+
+  <div><%= post.published_on %></div>
+  <span class="tags">
+    <% post.tags.each do |tag| %>
+      <a href="/tags/<%= tag.name %>"><%= tag.name %></a>
+    <% end %>
+  </span>
+
+</div>

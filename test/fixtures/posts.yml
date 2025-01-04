@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Visible Title
+  visible: true
+  published_on: 2025-01-01
+
+two:
+  title: Not Visible Title
+  visible: false
+  published_on: 2025-01-01
