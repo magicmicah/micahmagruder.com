@@ -11,9 +11,14 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="post-title-edit">
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.text_area :title %>
+  </div>
+
+  <div class="post-preview-edit">
+    <%= form.label :preview, style: "display: block" %>
+    <%= form.text_area :preview %>
   </div>
 
   <div>
@@ -35,7 +40,6 @@
     <%= form.label :published_on, style: "display: block" %>
     <%= form.date_field :published_on, value: form.object.published_on || Date.today %>
   </div>
-
 
   <div>
     <%= form.submit %>

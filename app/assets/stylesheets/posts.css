@@ -22,6 +22,16 @@
     color: hotpink;
 }
 
+.post-title-edit textarea {
+    width: 400px;
+    height: 100px;
+}
+
+.post-preview-edit textarea {
+    width: 400px;
+    height: 100px;
+}
+
 /* Add a card effect for articles */
 .card {
     background-color: white;

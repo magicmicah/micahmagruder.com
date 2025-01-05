@@ -16,6 +16,11 @@ class PostTest < ActiveSupport::TestCase
     assert @post2.title = "Invisible Title"
   end
 
+  test "preview should be present" do
+    assert @post1.preview = "Preview"
+    assert @post2.preview = "Preview"
+  end
+
   test "published_on should be present" do
     assert @post1.published_on = "2025-01-01"
     assert @post2.published_on = "2025-01-01"

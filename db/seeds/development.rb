@@ -4,13 +4,16 @@ Post.destroy_all
 Tag.destroy_all
 
 40.times do
+  jack_handey = Faker::Quote.jack_handey
   post = Post.create!(
     title: Faker::Book.title,
+    preview: jack_handey,
     published_on: Faker::Date.backward(days: 60),
     visible: rand < 0.67 # We only want 2/3 of the pages to be disible.
   )
+
   rich_content = <<~HTML
-    <p><strong>#{Faker::Quote.jack_handey}</strong></p>
+    <p><strong>#{jack_handey}</strong></p>
     <p>#{Faker::Lorem.paragraphs(number: 2).join("</p><p>")}</p>
     <ul>
       <li>#{Faker::Lorem.sentence}</li>

@@ -13,7 +13,8 @@
         <div class='card'>
           <div class='post-content'>
             <%= render post %>
-            <%= rich_text_preview_words(post, 50) %>
+            <%= post.preview %>
+            <br>
             <%= link_to 'Read More', post_path(post) %>
           </div>
         </div>
@@ -28,7 +29,8 @@
       <div class='card'>
         <div class='post-content'>
           <%= render post %>
-          <%= rich_text_preview_words(post, 50) %>
+          <%= post.preview %>
+          <br>
           <%= link_to 'Read More', post_path(post) %>
         </div>
       </div>

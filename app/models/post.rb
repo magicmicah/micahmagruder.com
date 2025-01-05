@@ -7,6 +7,11 @@ class Post < ApplicationRecord
   }
   scope :visible, -> { where(visible: true) }
 
+  validates :title, presence: true, length: { maximum: 250 }
+  validates :preview, presence: true, length: { maximum: 1000 }
+  validates :published_on, presence: true
+
+
   # Virtual attribute for tags
   attr_accessor :tag_names
 

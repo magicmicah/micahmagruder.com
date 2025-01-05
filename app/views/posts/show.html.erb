@@ -7,10 +7,11 @@
 <%= button_to "Destroy this post", @post, method: :delete %>
 <% end %>
 <%= render @post %>
-<% content_for :title, page_title(@post.title) %>
-    <div>
-      <%= @post.body %>
-    </div>
 <div>
-
+  Published: <%= @post.published_on %>
+</div>
+<br>
+<% content_for :title, page_title(@post.title) %>
+<div>
+  <%= @post.body %>
 </div>
