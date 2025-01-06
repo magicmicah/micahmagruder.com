@@ -26,9 +26,9 @@ development:
 
 production:
   primary: &primary_production
-  <<: *default
-  database: mmsite_prod_primary
-  url: <%= ENV["DATABASE_PROD_URL"] %>
+    <<: *default
+    database: mmsite_prod_primary
+    url: <%= ENV["DATABASE_PROD_URL"] %>
   cache:
     <<: *primary_production
     database: mmsite_prod_cache
