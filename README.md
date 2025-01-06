@@ -6,8 +6,10 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+Stuck to version 3.2.2 for now. 
 
 * System dependencies
+Need postgres installed
 
 * Configuration
 
