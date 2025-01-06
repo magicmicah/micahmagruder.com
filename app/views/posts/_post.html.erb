@@ -2,7 +2,7 @@
 
   <h2 class="post-title"><%= post.title %></h2>
 
-  <span class="tags">
+  <span class="tags">Tags: 
     <% post.tags.each do |tag| %>
       <a href="/tags/<%= tag.name %>"><%= tag.name %></a>
     <% end %>
