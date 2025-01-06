@@ -23,4 +23,8 @@ Need postgres installed
 
 * Deployment instructions
 
+kamal proxy boot_config set --http-port 4444 --https-port 4445
+kamal setup
+kamal deploy
+
 * ...
