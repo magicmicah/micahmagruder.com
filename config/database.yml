@@ -25,6 +25,5 @@ development:
   url: <%= ENV["DATABASE_DEV_URL"] %>
 
 production:
-  primary: &primary_production
-    <<: *default
-    url: <%= ENV["DATABASE_PROD_URL"] %>
+  <<: *default
+  url: <%= ENV["DATABASE_PROD_URL"] %>
