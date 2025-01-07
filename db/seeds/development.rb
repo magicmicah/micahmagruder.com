@@ -2,6 +2,13 @@ require 'faker'
 
 Post.destroy_all
 Tag.destroy_all
+User.destroy_all
+
+# Create a default user
+User.create!(
+  email_address: 'test@test.com',
+  password: 'password',
+)
 
 
 40.times do
