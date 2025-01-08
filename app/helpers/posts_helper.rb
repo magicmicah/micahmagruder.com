@@ -1,8 +1,12 @@
 module PostsHelper
-  def rich_text_preview_words(post, word_limit = 20)
-    doc = Nokogiri::HTML::DocumentFragment.parse(post.body.to_s)
-    truncated = doc.text.split[0...word_limit].join(" ") + "..."
-    doc.content = truncated
-    doc.to_html.html_safe
+  def wrap_pre_tags(content)
+    content.gsub(/<pre>(.*?)<\/pre>/m) do
+      <<-HTML
+      <div class="code-block">
+        <pre>#{$1}</pre>
+        <button class="copy-button">Copy</button>
+      </div>
+      HTML
+    end.html_safe
   end
 end

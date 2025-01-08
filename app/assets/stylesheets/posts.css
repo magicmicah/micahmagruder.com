@@ -57,7 +57,28 @@ span[class='page current'] {
     padding: 8px 16px;
 
 }
-  
-
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+.code-block {
+    position: relative;
+  }
+  
+  .copy-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  
+  .copy-btn:hover {
+    background-color: #0056b3;
+  }
+  
