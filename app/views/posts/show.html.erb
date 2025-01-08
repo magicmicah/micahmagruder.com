@@ -13,5 +13,29 @@
 <br>
 <% content_for :title, page_title(@post.title) %>
 <div>
-  <%= @post.body %>
+<%= wrap_pre_tags(@post.body.to_s) %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("button.copy-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const codeBlock = button.previousElementSibling;
+      if (codeBlock) {
+        navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+          button.textContent = "Copied!";          
+          currentBackgroundColor = button.style.backgroundColor;
+          currentColor = button.style.color;
+          button.style.backgroundColor = "#4CAF50";
+          button.style.color = "white";
+          setTimeout(() => {
+            button.textContent = "Copy";
+            button.style.backgroundColor = currentBackgroundColor;
+            button.style.color = currentColor;
+          }, 2000);
+        });
+      }
+    });
+  });
+});
+</script>
