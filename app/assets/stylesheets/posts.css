@@ -67,15 +67,15 @@ span[class='page current'] {
   
   .copy-button {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 4px;
+    right: 4px;
     background-color: #007bff;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 11px;
   }
   
   .copy-btn:hover {
