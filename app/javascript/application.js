@@ -8,7 +8,7 @@ import "@rails/actiontext"
 
 import { HighlightJS } from "highlight.js"
 
-HighlightJS.configure({ languages: ["ruby", "python", "javascript"] })
+HighlightJS.configure({ languages: ["html", "javascript", "python", "ruby"] })
 
 document.addEventListener("turbo:load", (event) => {
   document.querySelectorAll('pre').forEach((block) => {
