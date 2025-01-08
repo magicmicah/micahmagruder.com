@@ -1,6 +1,7 @@
 .footer {
     overflow: hidden;
     background-color: #333;
+    margin-top: 25px;
 }
 
 .footer a {

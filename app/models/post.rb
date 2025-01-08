@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  after_validation :set_slug, only: [ :create, :update ]
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   has_rich_text :body
@@ -25,6 +26,10 @@ class Post < ApplicationRecord
     end
   end
 
+  def to_param
+    "#{id}-#{slug}"
+  end
+
   private
 
   def assign_tags
@@ -33,5 +38,9 @@ class Post < ApplicationRecord
     self.tags = tag_names.split(",").map do |name|
       Tag.find_or_create_by(name: name.strip.downcase)
     end
+  end
+
+  def set_slug
+    self.slug = title.to_s.parameterize
   end
 end
