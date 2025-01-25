@@ -22,7 +22,7 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["DATABASE_DEV_URL"] %>
+  url: 'postgres://mmsite_dev:Nxyi93apwl39@192.168.0.61:5432/mmsite_dev'
 
 production:
   <<: *default

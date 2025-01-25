@@ -1,5 +1,6 @@
 <div class="topnav">
     <%= link_to "Home", root_path %>
+    <%= link_to "Projects", projects_path %>
     <%= link_to "About", about_path %>
     <% if authenticated? %>
         <%= link_to "Logout", session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" } %>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicahTube</title>
+  <style>
+    /* Basic CSS for layout and styling */
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .channel-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; }
+    .channel { border: 1px solid #ccc; padding: 10px; cursor: pointer;  }
+    #player { width: 400px; left: 400px;  margin: 20px 0; position: relative; }
+    #container {text-align: center; margin: 100px; padding: 20px; position: relative;  }
+    #television { margin: 20px 0; width: 720px; position: absolute; }
+  </style>
+</head>
+<body>
+  <h1>MicahTube</h1>
+
+  <div id="container">
+    <button onclick="nextChannel()">Next</button>
+
+  <h2 id="now-playing"></h2>
+  <img id="television" src="<%= image_path("retro-tv.jpg") %>">
+  <div>
+    <video id="player" controls></video>
+  </div>
+  <!--
+  <button onclick="player.pause()">Pause</button>
+  <button onclick="player.currentTime -= 10">Rewind 10s</button>
+  <button onclick="player.currentTime += 10">Forward 10s</button>
+  <button onclick="player.volume -= 0.1">Volume Down</button>
+  <button onclick="player.volume += 0.1">Volume Up</button>
+  <button onclick="player.muted = !player.muted">Mute</button>
+  <button onclick="player.requestFullscreen()">Fullscreen</button>
+  <button onclick="player.src = ''">Stop</button>
+  <div class="channel-list" id="channels"></div>
+  -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <script>
+    const channelData = [
+      { name: "Rick & Morty", logo: "https://i.imgur.com/uPV5CT1.png", stream: "https://adultswim-vodlive.cdn.turner.com/live/rick-and-morty/stream_de.m3u8" },
+      { name: "Infomercials", logo: "https://i.imgur.com/gu8luP0.png", stream: "https://adultswim-vodlive.cdn.turner.com/live/infomercials/stream_de.m3u8" },
+    ];
+
+    const channelsDiv = document.getElementById("channels");
+    const player = document.getElementById("player");
+
+
+    let currentChannelIndex = 0;
+
+    // Render Channels
+    function renderChannels(filter = "") {
+      channelsDiv.innerHTML = "";
+      const filtered = channelData.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()));
+      filtered.forEach(channel => {
+        const div = document.createElement("div");
+        div.className = "channel";
+        div.innerHTML = `<img src="${channel.logo}" alt="${channel.name}" style="width:100px;" />`;
+        div.onclick = () => playChannel(channel.stream);
+        channelsDiv.appendChild(div);
+      });
+    }
+
+    // Play Stream
+    function playChannel(streamUrl) {
+      let proxyUrl = 'http://localhost:3000/proxy?url=' + encodeURIComponent(streamUrl);
+      console.log(streamUrl)
+      console.log(proxyUrl)
+      currentChannelIndex = channelData.findIndex(c => c.stream === streamUrl);
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(proxyUrl);
+        hls.attachMedia(player);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          player.play();
+        });
+      } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+        // for mac safari support
+        player.src = proxyUrl;
+        player.addEventListener('loadedmetadata', function () {
+          player.play();
+        });
+      } else {
+        console.error('This browser does not support M3U8 playback.');
+      }
+      document.getElementById("now-playing").innerText = channelData[currentChannelIndex].name;
+    }
+
+    function nextChannel() {
+      console.log(currentChannelIndex);
+      const maxIndex = channelData.length - 1;
+      if (currentChannelIndex < maxIndex) {
+        currentChannelIndex++;
+      } else {
+        currentChannelIndex = 0;
+      }
+      playChannel(channelData[currentChannelIndex].stream);
+    }
+    // Initial Render
+    renderChannels();
+  </script>
+</body>
+</html>

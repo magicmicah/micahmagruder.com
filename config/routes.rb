@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get "about", to: "static_pages#about"
   get "charliemurphy", to: redirect("/session/new")
   root "posts#index"
+  get "projects", to: "static_pages#projects"
+  get "projects/micahtube", to: "static_pages#micahtube"
+
+  get "/proxy", to: "proxy#fetch_stream"
 end

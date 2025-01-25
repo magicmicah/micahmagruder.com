@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video in Old TV</title>
+  <style>
+    /* styles.css */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+  margin: 0;
+}
+
+.tv-container {
+  position: relative;
+  width: 600px; /* Adjust as needed */
+  height: auto;
+}
+
+.tv-image {
+  width: 100%;
+  height: auto;
+}
+
+.tv-video {
+  position: absolute;
+  top: 20%; /* Adjust based on your TV image */
+  left: 12%; /* Adjust based on your TV image */
+  width: 76%; /* Adjust to fit the screen area */
+  height: 60%; /* Adjust to fit the screen area */
+  object-fit: cover; /* Ensures the video scales nicely */
+}
+
+  </style>
+</head>
+<body>
+  <div class="tv-container">
+    <img src="../../assets/images/retro-tv.jpg" alt="Old Style TV" class="tv-image">
+    <video class="tv-video" controls>
+      <source src="video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</body>
+<script>
+    const video = document.querySelector('.tv-video');
+
+    video.addEventListener('play', () => {
+    console.log('The video is playing!');
+    });
+
+    video.addEventListener('pause', () => {
+    console.log('The video is paused!');
+    });
+
+</script>
+</html>
