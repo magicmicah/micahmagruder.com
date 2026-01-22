@@ -1,64 +1,264 @@
 .post {
-    font-size: larger;
+    font-size: 1.02rem;
+}
+
+.form-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.page-title {
+    margin: 0 0 6px;
+    font-size: 2rem;
+}
+
+.page-subtitle {
+    margin: 0;
+    color: var(--ink-muted);
+}
+
+.post-form {
+    background: white;
+    padding: 24px 26px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-grid {
+    display: grid;
+    gap: 18px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.text-input,
+.form-field input[type="text"],
+.form-field input[type="date"],
+.form-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d6cfc2;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fffaf3;
+}
+
+.form-field textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-field--inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-field--inline label {
+    margin: 0;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.page-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.form-errors {
+    border: 1px solid #f2b3b3;
+    background: #ffecec;
+    color: #7a1f1f;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.form-errors ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+trix-editor {
+    min-height: 240px;
+    padding: 14px;
+    border: 1px solid #d6cfc2;
+    border-radius: 14px;
+    background: #fffaf3;
+}
+
+.trix-content pre {
+    background: #efece6;
+    color: var(--ink);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.posts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.posts-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--paper-strong);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    box-shadow: var(--shadow);
+}
+
+.posts-title {
+    margin: 0 0 6px;
+    font-size: 2.2rem;
+}
+
+.posts-subtitle {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 1rem;
+}
+
+.posts-list {
+    display: grid;
+    gap: 20px;
+}
+
+.search-summary {
+    margin: 0;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.search-empty {
+    margin: 0;
+    color: var(--ink-muted);
 }
 
 .post-title {
-    color: #555;
+    color: var(--ink);
+    margin-bottom: 6px;
 }
 
 .post-content {
-    color: #555
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.post-content a:link {
-    color: red
-}
-
+.post-content a:link,
 .post-content a:visited {
-    color: green
+    color: var(--sea);
 }
 
 .post-content a:hover {
-    color: hotpink;
+    color: var(--accent);
 }
 
 .post-title-edit textarea {
-    width: 400px;
-    height: 100px;
+    width: 100%;
+    max-width: 640px;
+    height: 120px;
 }
 
 .post-preview-edit textarea {
-    width: 400px;
-    height: 100px;
+    width: 100%;
+    max-width: 640px;
+    height: 120px;
 }
 
 /* Add a card effect for articles */
 .card {
     background-color: white;
-    padding: 2px;
-    margin: 2px;
+    padding: 20px 22px;
+    margin: 18px 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
  }
+
+ .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(27, 24, 31, 0.16);
+ }
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+
+.read-more:hover {
+    border-color: var(--accent);
+}
  
  .pagination {
-    text-align: center;
-    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0 8px;
 }
   
 .pagination a {
-    color: black;
-    float: center;
-    padding: 8px 16px;
-    text-decoration: none;
+    color: var(--ink);
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: white;
+    box-shadow: 0 8px 20px rgba(27, 24, 31, 0.08);
 }
 
 span[class='page current'] {
-    background-color: #333;
+    background-color: var(--ink);
     color: white;
     padding: 8px 16px;
+    border-radius: 999px;
 
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+    background-color: var(--paper-strong);
+}
+
+.post-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.post-actions form {
+    margin: 0;
+}
 
 
 .code-block {
@@ -78,7 +278,64 @@ span[class='page current'] {
     font-size: 11px;
   }
   
-  .copy-btn:hover {
+  .copy-button:hover {
     background-color: #0056b3;
   }
+
+  .tags {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+  }
+
+  .tags a {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef3f0;
+    color: var(--sea);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .tags a:hover {
+    background: #ffe7e2;
+  }
+
+  pre,
+  code {
+    font-family: "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
+
+  pre {
+    background: #1b1c20;
+    color: #f7f2ea;
+    padding: 18px;
+    border-radius: 14px;
+    overflow-x: auto;
+  }
+
+@media (max-width: 720px) {
+    .page-header {
+        align-items: flex-start;
+    }
+
+    .posts-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .posts-title {
+        font-size: 1.9rem;
+    }
+
+    .page-title {
+        font-size: 1.7rem;
+    }
+}
   
