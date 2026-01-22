@@ -1,43 +1,52 @@
 <% content_for :title, page_title("Home") %>
 
-<p style="color: green"><%= notice %></p>
-<% if authenticated? %>
-  <%= link_to "New post", new_post_path %>
-<% end %>
+<div class="posts-page">
+  <div class="posts-hero">
+    <div>
+      <h1 class="posts-title">Latest posts</h1>
+      <p class="posts-subtitle">Fresh notes, essays, and experiments.</p>
+    </div>
+    <% if authenticated? %>
+      <%= link_to "New post", new_post_path, class: "btn" %>
+    <% end %>
+  </div>
 
-<% if @search_query.present? %>
-  <h3><%= @search_results %> Search Results for "<%= @search_query %>"</h3>
-  <% if @posts.any? %>
-    <div id="posts">
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+
+  <% if @search_query.present? %>
+    <p class="search-summary"><%= @search_results %> results for "<%= @search_query %>"</p>
+    <% if @posts.any? %>
+      <div id="posts" class="posts-list">
+        <% @posts.each do |post| %>
+          <div class="card">
+            <div class="post-content">
+              <%= render post %>
+              <%= post.preview %>
+              <%= link_to "Read more", post_path(post), class: "read-more" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="search-empty">No results found for "<%= @search_query %>".</p>
+    <% end %>
+  <% else %>
+    <div id="posts" class="posts-list">
       <% @posts.each do |post| %>
-        <div class='card'>
-          <div class='post-content'>
+        <div class="card">
+          <div class="post-content">
             <%= render post %>
             <%= post.preview %>
-            <br>
-            <%= link_to 'Read More', post_path(post) %>
+            <%= link_to "Read more", post_path(post), class: "read-more" %>
           </div>
         </div>
       <% end %>
     </div>
-  <% else %>
-    <p>No results found for "<%= @search_query %>".</p>
   <% end %>
-<% else %>
-  <div id="posts">
-    <% @posts.each do |post| %>
-      <div class='card'>
-        <div class='post-content'>
-          <%= render post %>
-          <%= post.preview %>
-          <br>
-          <%= link_to 'Read More', post_path(post) %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
 
-<div class="pagination">
-  <%= paginate @posts %>
+  <div class="pagination">
+    <%= paginate @posts %>
+  </div>
 </div>

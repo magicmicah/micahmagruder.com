@@ -17,24 +17,27 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "site", "header", "footer", "posts", "actiontext", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/sunburst.min.css" />
   </head>
 
   <body>
   <!-- Top Navigation -->
-  <header>
+  <header class="site-header">
     <%= render 'layouts/header' %>
   </header>
 
   <!-- Main Content -->
-  <main>
+  <main class="site-main page-enter">
     <%= yield %>
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer class="site-footer">
     <%= render 'layouts/footer' %>
   </footer>
   </body>

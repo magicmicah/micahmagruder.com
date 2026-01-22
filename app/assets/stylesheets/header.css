@@ -1,23 +1,42 @@
 .topnav {
-    overflow: hidden;
-    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
   }
-  
+
   .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 14px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
   }
-  
+
   .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+    background: var(--paper-strong);
+    color: var(--accent);
   }
-  
+
   .topnav a.active {
-    background-color: #04AA6D;
+    background: var(--accent);
     color: white;
+  }
+
+  @media (max-width: 720px) {
+    .topnav {
+      flex-direction: column;
+      align-items: flex-start;
+      border-radius: 24px;
+    }
   }
