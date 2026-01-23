@@ -34,3 +34,5 @@
 /config/master.key
 /config/docker_developer.key
 *.key
+
+.DS_Store
