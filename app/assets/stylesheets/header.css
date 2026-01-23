@@ -1,8 +1,7 @@
 .topnav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 8px;
     max-width: 1040px;
     margin: 0 auto;
     padding: 16px 20px;

@@ -1,0 +1,24 @@
+<% content_for :title, page_title("Pages") %>
+
+<h1>Pages</h1>
+
+<%= link_to "New page", new_page_path, class: "btn" %>
+
+<% if @pages.any? %>
+  <ul class="pages-list">
+    <% @pages.each do |page| %>
+      <li class="pages-list-item">
+        <div class="pages-list-info">
+          <strong><%= link_to page.title, public_page_path(page.slug) %></strong>
+          <span class="pages-list-slug">/<%= page.slug %></span>
+        </div>
+        <div class="pages-list-actions">
+          <%= link_to "Edit", edit_page_path(page), class: "btn btn--ghost" %>
+          <%= button_to "Delete", page_path(page), method: :delete, class: "btn btn--danger", data: { turbo_confirm: "Are you sure?" } %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pages yet.</p>
+<% end %>

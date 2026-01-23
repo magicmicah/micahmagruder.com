@@ -1,0 +1,7 @@
+<% content_for :title, page_title("New Page") %>
+
+<h1>New Page</h1>
+
+<%= render "form", page: @page %>
+
+<%= link_to "Back to pages", pages_path, class: "btn btn--ghost" %>

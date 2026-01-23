@@ -1,0 +1,39 @@
+<div class="page-form">
+  <%= form_with(model: page, class: "form-grid") do |form| %>
+    <% if page.errors.any? %>
+      <div class="form-errors">
+        <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
+        <ul>
+          <% page.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "text-input" %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :slug %>
+      <%= form.text_field :slug, class: "text-input", placeholder: "e.g., now, uses, colophon" %>
+      <p class="form-hint">This will be the URL: /<%= page.slug.presence || "slug" %></p>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :content %>
+      <%= form.rich_text_area :content, class: "trix-input" %>
+    </div>
+
+    <div class="form-field form-field--inline">
+      <%= form.check_box :show_in_nav %>
+      <%= form.label :show_in_nav, "Show in navigation" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit(page.persisted? ? "Update page" : "Create page", class: "btn") %>
+    </div>
+  <% end %>
+</div>
