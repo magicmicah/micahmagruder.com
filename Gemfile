@@ -67,3 +67,4 @@ end
 
 gem "loofah", "~> 2.24"
 gem "kaminari"
+gem "feedjira"

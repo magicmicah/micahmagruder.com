@@ -1,5 +1,27 @@
 <% content_for :title, page_title("About") %>
 
-<p>Welcome to the site!</p>
+<section class="about-section">
+  <h1>About Me</h1>
+  <p>Welcome to the site! I'm Micah, I'll fill out some other relevant info in here in the future. .</p>
+</section>
 
-<p>Eventually there will be more content here but for now, this is all that's here. Come back soon.</p>
+<section class="about-section">
+  <h2>What I'm Reading</h2>
+  <p>Here's what's on my nightstand right now, plus some recent reads. You can see my full library on <%= link_to "Goodreads", "https://www.goodreads.com/review/list/956835?shelf=read", target: "_blank", rel: "noopener noreferrer" %>.</p>
+
+  <div class="reading-columns">
+    <% if @currently_reading.any? %>
+      <div class="reading-column">
+        <h3>Currently Reading</h3>
+        <%= render "shared/book_shelf", books: @currently_reading %>
+      </div>
+    <% end %>
+
+    <% if @recently_read.any? %>
+      <div class="reading-column">
+        <h3>Recently Finished</h3>
+        <%= render "shared/book_shelf", books: @recently_read, show_ratings: true %>
+      </div>
+    <% end %>
+  </div>
+</section>

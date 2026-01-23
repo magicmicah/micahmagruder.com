@@ -1,0 +1,27 @@
+<% if books.any? %>
+  <ul class="book-list">
+    <% books.each do |book| %>
+      <li>
+        <a href="<%= book[:goodreads_url] %>" class="book-item" target="_blank" rel="noopener noreferrer">
+          <% if book[:cover_url].present? %>
+            <img src="<%= book[:cover_url] %>" alt="<%= book[:title] %>" class="book-thumb" loading="lazy">
+          <% else %>
+            <div class="book-thumb book-thumb--placeholder"></div>
+          <% end %>
+          <div class="book-info">
+            <span class="book-title"><%= book[:title] %></span>
+            <span class="book-meta">
+              <%= book[:author] %>
+              <% if local_assigns[:show_ratings] && book[:rating].present? %>
+                <span class="book-rating"><%= "★" * book[:rating] %><%= "☆" * (5 - book[:rating]) %></span>
+              <% end %>
+            </span>
+            <% if local_assigns[:show_ratings] && book[:review].present? %>
+              <span class="book-review"><%= book[:review] %></span>
+            <% end %>
+          </div>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
