@@ -307,6 +307,19 @@ span[class='page current'] {
     background: #ffe7e2;
   }
 
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .reading-time {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+
   pre,
   code {
     font-family: "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace;

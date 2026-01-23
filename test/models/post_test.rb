@@ -34,4 +34,21 @@ class PostTest < ActiveSupport::TestCase
     puts @post2.visible
     assert @post2.visible == false
   end
+
+  test "reading_time returns 1 min for short content" do
+    @post1.body = "This is a short post."
+    assert_equal "1 min read", @post1.reading_time
+  end
+
+  test "reading_time calculates correctly for longer content" do
+    # 400 words should be 2 min at 200 wpm
+    @post1.body = "word " * 400
+    assert_equal "2 min read", @post1.reading_time
+  end
+
+  test "reading_time rounds up partial minutes" do
+    # 250 words should be 2 min (rounds up from 1.25)
+    @post1.body = "word " * 250
+    assert_equal "2 min read", @post1.reading_time
+  end
 end

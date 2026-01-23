@@ -30,6 +30,13 @@ class Post < ApplicationRecord
     "#{id}-#{slug}"
   end
 
+  def reading_time
+    words_per_minute = 200
+    word_count = body.to_plain_text.split.size
+    minutes = (word_count / words_per_minute.to_f).ceil
+    minutes < 1 ? "1 min read" : "#{minutes} min read"
+  end
+
   private
 
   def assign_tags
