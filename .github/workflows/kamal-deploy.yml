@@ -15,7 +15,4 @@ jobs:
         oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
         oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
         tags: tag:prodweb
-    - name: Ping Test
-      uses: tailscale/github-action@v4
-      with:
         ping: docker01
