@@ -9,13 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Tailscale
+    - name: Tailscale Up
       uses: tailscale/github-action@v4
       with:
         oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
         oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
         tags: tag:prodweb
-    - name: Tailscale
+    - name: Ping Test
       uses: tailscale/github-action@v4
       with:
         ping: docker01
