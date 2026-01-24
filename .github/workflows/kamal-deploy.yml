@@ -31,5 +31,6 @@ jobs:
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         KAMAL_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USER }}
-        KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }} 
+        KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
+        DATABASE_PROD_URL: ${{ secrets.DATABASE_PROD_URL }}
         RAILS_ENV: production
