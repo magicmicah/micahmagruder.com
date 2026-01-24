@@ -1,9 +1,8 @@
 name: Kamal Deploy
 
 on:
-  pull_request:
   push:
-    branches: [ kamal-deploy ]
+    branches: [ main ]
 
 jobs:
   deploy:
