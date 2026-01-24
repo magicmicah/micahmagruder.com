@@ -7,7 +7,7 @@ image: mmagruder/micahmagruder.com
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.50
+    - docker01
   # job:
   #   hosts:
   #     - 192.168.0.1
