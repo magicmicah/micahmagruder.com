@@ -3,6 +3,9 @@
   <h2 class="post-title"><%= post.title %></h2>
 
   <div class="post-meta">
+    <% unless post.visible %>
+      <span class="preview-badge">Preview</span>
+    <% end %>
     <span class="reading-time"><%= post.reading_time %></span>
     <span class="tags">
       <% post.tags.each do |tag| %>

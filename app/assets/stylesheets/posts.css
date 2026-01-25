@@ -322,6 +322,19 @@ span[class='page current'] {
     font-weight: 500;
   }
 
+  .preview-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #fff3cd;
+    color: #856404;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
   pre,
   code {
     font-family: "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace;
