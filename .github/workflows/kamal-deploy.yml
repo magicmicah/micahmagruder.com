@@ -26,6 +26,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy command
+      id: deploy
       run: bundle exec kamal deploy
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -33,3 +34,51 @@ jobs:
         KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
         DATABASE_PROD_URL: ${{ secrets.DATABASE_PROD_URL }}
         RAILS_ENV: production
+
+    - name: Notify on success
+      if: success()
+      run: |
+        curl --request POST \
+          --url https://api.courier.com/send \
+          --header "Authorization: Bearer ${{ secrets.COURIER_API_KEY }}" \
+          --header "Content-Type: application/json" \
+          --data '{
+            "message": {
+              "to": {
+                "email": "${{ secrets.NOTIFY_EMAIL }}",
+                "phone_number": "${{ secrets.NOTIFY_PHONE }}"
+              },
+              "routing": {
+                "method": "all",
+                "channels": ["email", "sms"]
+              },
+              "content": {
+                "title": "✅ Deploy Succeeded",
+                "body": "micahmagruder.com deployed successfully from commit ${{ github.sha }} by ${{ github.actor }}"
+              }
+            }
+          }'
+
+    - name: Notify on failure
+      if: failure()
+      run: |
+        curl --request POST \
+          --url https://api.courier.com/send \
+          --header "Authorization: Bearer ${{ secrets.COURIER_API_KEY }}" \
+          --header "Content-Type: application/json" \
+          --data '{
+            "message": {
+              "to": {
+                "email": "${{ secrets.NOTIFY_EMAIL }}",
+                "phone_number": "${{ secrets.NOTIFY_PHONE }}"
+              },
+              "routing": {
+                "method": "all",
+                "channels": ["email", "sms"]
+              },
+              "content": {
+                "title": "❌ Deploy Failed",
+                "body": "micahmagruder.com deploy FAILED for commit ${{ github.sha }} by ${{ github.actor }}. Check: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              }
+            }
+          }'
