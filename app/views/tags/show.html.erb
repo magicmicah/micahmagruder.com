@@ -1,16 +1,38 @@
-<% content_for :title, page_title("Home") %>
+<% content_for :title, page_title(@tag.name) %>
 
- <% if @posts.any? %>
-  <div id="posts">
-    <% @posts.each do |post| %>
-      <div class='card'>
-        <div class='post-content'>
-          <%= render post %>
-          <%= post.preview %>
-          <br>
-          <%= link_to 'Read More', post_path(post) %>
-        </div>
-      </div>
-    <% end %>
+<div class="posts-page">
+  <div class="posts-hero">
+    <div>
+      <h1 class="posts-title">Tagged: <%= @tag.name %></h1>
+      <p class="posts-subtitle">Posts and links with this tag.</p>
+    </div>
   </div>
-<% end %>
+
+  <% if @posts.any? %>
+    <h2>Posts</h2>
+    <div id="posts" class="posts-list">
+      <% @posts.each do |post| %>
+        <div class="card">
+          <div class="post-content">
+            <%= render post %>
+            <%= post.preview %>
+            <%= link_to "Read more", post_path(post), class: "read-more" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @links.any? %>
+    <h2>Links</h2>
+    <div id="links" class="posts-list">
+      <% @links.each do |link| %>
+        <%= render partial: "links/link_card", locals: { link: link } %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @posts.empty? && @links.empty? %>
+    <p class="search-empty">No posts or links found with this tag.</p>
+  <% end %>
+</div>

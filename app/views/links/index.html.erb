@@ -1,0 +1,47 @@
+<% content_for :title, page_title("Interesting Links") %>
+
+<div class="posts-page">
+  <div class="posts-hero">
+    <div>
+      <h1 class="posts-title">Interesting Links</h1>
+      <p class="posts-subtitle">I browse, a lot. Sometimes I might want to come back to it later, or share it with others, so that's what this page is for.</p>
+    </div>
+    <% if authenticated? %>
+      <%= link_to "New link", new_link_path, class: "btn" %>
+    <% end %>
+  </div>
+
+  <div class="search-bar">
+    <%= form_with url: links_path, method: :get, local: true do %>
+      <%= text_field_tag :query, params[:query], placeholder: "Search links...", class: "search-input" %>
+      <%= submit_tag "Search", class: "btn" %>
+    <% end %>
+  </div>
+
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+
+  <% if @search_query.present? %>
+    <p class="search-summary"><%= @search_results %> results for "<%= @search_query %>"</p>
+    <% if @links.any? %>
+      <div id="links" class="posts-list">
+        <% @links.each do |link| %>
+          <%= render partial: "link_card", locals: { link: link } %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="search-empty">No results found for "<%= @search_query %>".</p>
+    <% end %>
+  <% else %>
+    <div id="links" class="posts-list">
+      <% @links.each do |link| %>
+        <%= render partial: "link_card", locals: { link: link } %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="pagination">
+    <%= paginate @links %>
+  </div>
+</div>

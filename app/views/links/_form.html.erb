@@ -1,0 +1,44 @@
+<div class="post-form">
+<%= form_with(model: link, class: "form-grid") do |form| %>
+  <% if link.errors.any? %>
+    <div class="form-errors">
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+        <% link.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "text-input" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :url %>
+    <%= form.url_field :url, class: "text-input", placeholder: "https://" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :comment, "Notes (optional)" %>
+    <%= form.text_area :comment, class: "text-input", rows: 4 %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :tag_names, "Tags (comma-separated)" %>
+    <%= form.text_field :tag_names, value: link.tags.map(&:name).join(", "), class: "text-input", placeholder: "reading, tech, inspiration" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :bookmarked_at, "Date Saved" %>
+    <%= form.datetime_local_field :bookmarked_at, value: form.object.bookmarked_at || Time.current, class: "text-input" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit(form.object.persisted? ? "Update link" : "Save link", class: "btn") %>
+  </div>
+<% end %>
+</div>

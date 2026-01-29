@@ -1,17 +1,18 @@
 <div class="post-content" id="<%= dom_id post %>">
-
-  <h2 class="post-title"><%= post.title %></h2>
-
   <div class="post-meta">
     <% unless post.visible %>
       <span class="preview-badge">Preview</span>
     <% end %>
+    <span class="post-date"><%= post.published_on.strftime("%b %d, %Y") %></span>
     <span class="reading-time"><%= post.reading_time %></span>
-    <span class="tags">
-      <% post.tags.each do |tag| %>
-        <a href="/posts/tags/<%= tag.name %>"><%= tag.name %></a>
-      <% end %>
-    </span>
+    <% if post.tags.any? %>
+      <span class="tags">
+        <% post.tags.each do |tag| %>
+          <%= link_to tag.name, tag_path(tag.name) %>
+        <% end %>
+      </span>
+    <% end %>
   </div>
 
+  <h2 class="post-title"><%= post.title %></h2>
 </div>

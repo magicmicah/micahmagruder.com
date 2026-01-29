@@ -1,0 +1,16 @@
+<% content_for :title, page_title("New Link") %>
+
+<div class="form-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">New link</h1>
+      <p class="page-subtitle">Save an interesting link.</p>
+    </div>
+  </div>
+
+  <%= render "form", link: @link %>
+
+  <div class="page-actions">
+    <%= link_to "Back to links", links_path, class: "btn btn--ghost" %>
+  </div>
+</div>

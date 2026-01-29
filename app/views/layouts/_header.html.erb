@@ -1,11 +1,13 @@
 <div class="topnav">
     <%= link_to "Home", root_path %>
+    <%= link_to "Links", links_path %>
     <% Page.in_nav.each do |page| %>
         <%= link_to page.title, public_page_path(page.slug) %>
     <% end %>
     <%= link_to "About", about_path %>
     <% if authenticated? %>
         <%= link_to "Pages", pages_path %>
+        <%= link_to "Profile", profile_path %>
         <%= link_to "Logout", session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to logout?" } %>
     <% end %>
 </div>

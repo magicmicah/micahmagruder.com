@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :posts
   resources :pages, param: :id
+  resources :links
+
+  resource :profile, only: [ :show, :update ], controller: "profile" do
+    patch :password, to: "profile#update_password", as: :password
+    post :reset_token, to: "profile#reset_token"
+  end
+
   get "posts/tags/:id", to: "tags#show", as: "tag"
   get "up" => "rails/health#show", as: :rails_health_check
   get "about", to: "static_pages#about"

@@ -6,21 +6,19 @@ class PostsController < ApplicationController
   def index
     @posts = if authenticated?
       if params[:query].present?
-        @search_query = params[:query] # Store the query for display purposes
-        # get the total results
-        @search_results = Post.visible.search(params[:query]).count
-        @posts = Post.page(params[:page]).per(Kaminari.config.default_per_page).search(params[:query]).order(published_on: :desc)
+        @search_query = params[:query]
+        @search_results = Post.search(params[:query]).count
+        Post.page(params[:page]).per(Kaminari.config.default_per_page).search(params[:query]).order(published_on: :desc)
       else
-        @posts = Post.page(params[:page]).per(Kaminari.config.default_per_page).order(published_on: :desc)
+        Post.page(params[:page]).per(Kaminari.config.default_per_page).order(published_on: :desc)
       end
     else
       if params[:query].present?
-        @search_query = params[:query] # Store the query for display purposes
-        # get the total results
+        @search_query = params[:query]
         @search_results = Post.visible.search(params[:query]).count
-        @posts = Post.visible.page(params[:page]).per(Kaminari.config.default_per_page).search(params[:query]).order(published_on: :desc)
+        Post.visible.page(params[:page]).per(Kaminari.config.default_per_page).search(params[:query]).order(published_on: :desc)
       else
-        @posts = Post.visible.page(params[:page]).per(Kaminari.config.default_per_page).order(published_on: :desc)
+        Post.visible.page(params[:page]).per(Kaminari.config.default_per_page).order(published_on: :desc)
       end
     end
   end
