@@ -148,6 +148,33 @@ trix-editor {
     gap: 20px;
 }
 
+.search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #d6cfc2;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: white;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
 .search-summary {
     margin: 0;
     font-weight: 600;
@@ -320,6 +347,11 @@ span[class='page current'] {
     font-size: 0.85rem;
     color: var(--ink-muted);
     font-weight: 500;
+  }
+
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
   }
 
   .preview-badge {

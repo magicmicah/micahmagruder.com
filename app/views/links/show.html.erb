@@ -1,0 +1,42 @@
+<% content_for :title, page_title(@link.title) %>
+
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+
+<%= link_to "Back to links", links_path, class: "btn btn--ghost" %>
+
+<% if authenticated? %>
+<div class="post-actions">
+  <%= link_to "Edit this link", edit_link_path(@link), class: "btn btn--ghost" %>
+  <%= button_to "Destroy this link", @link, method: :delete, class: "btn btn--danger" %>
+</div>
+<% end %>
+
+<div class="link-detail">
+  <h1 class="link-title"><%= @link.title %></h1>
+
+  <div class="link-meta">
+    <span class="link-domain"><%= @link.domain %></span>
+    <span class="link-date">Saved <%= @link.bookmarked_at.strftime("%B %d, %Y") %></span>
+  </div>
+
+  <% if @link.tags.any? %>
+    <div class="tags">
+      <% @link.tags.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag.name) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="link-url">
+    <%= link_to @link.url, @link.url, target: "_blank", rel: "noopener" %>
+  </div>
+
+  <% if @link.comment.present? %>
+    <div class="link-comment-section">
+      <h3>Notes</h3>
+      <p><%= simple_format(@link.comment) %></p>
+    </div>
+  <% end %>
+</div>

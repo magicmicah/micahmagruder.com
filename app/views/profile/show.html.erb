@@ -1,0 +1,110 @@
+<% content_for :title, page_title("Profile") %>
+
+<div class="form-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Profile</h1>
+      <p class="page-subtitle">Manage your account settings.</p>
+    </div>
+  </div>
+
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+
+  <% if alert.present? %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+
+  <!-- Account Info Section -->
+  <div class="post-form profile-section">
+    <h2>Account</h2>
+    <%= form_with model: @user, url: profile_path, method: :patch, class: "form-grid" do |form| %>
+      <div class="form-field">
+        <%= form.label :email_address, "Email" %>
+        <%= form.email_field :email_address, class: "text-input" %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Update Email", class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Password Section -->
+  <div class="post-form profile-section">
+    <h2>Change Password</h2>
+    <%= form_with url: password_profile_path, method: :patch, class: "form-grid" do |form| %>
+      <div class="form-field">
+        <%= form.label :current_password, "Current Password" %>
+        <%= form.password_field :current_password, class: "text-input", required: true %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :password, "New Password" %>
+        <%= form.password_field :password, class: "text-input", required: true %>
+      </div>
+
+      <div class="form-field">
+        <%= form.label :password_confirmation, "Confirm New Password" %>
+        <%= form.password_field :password_confirmation, class: "text-input", required: true %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Update Password", class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- API Token Section -->
+  <div class="post-form profile-section">
+    <h2>API Token</h2>
+    <p class="form-hint">Use this token to create links via external tools (iOS Shortcuts, Chrome extensions, etc.).</p>
+
+    <div class="form-field">
+      <label>Your API Token</label>
+      <div class="api-token-display">
+        <code class="api-token"><%= @user.api_token %></code>
+        <button type="button" class="btn btn--ghost" onclick="copyToken()">Copy</button>
+      </div>
+      <p class="form-hint">Keep this secret. Anyone with this token can create links on your behalf.</p>
+    </div>
+
+    <details class="api-details">
+      <summary>API Usage Example</summary>
+      <div class="form-field">
+        <pre class="api-example"><code>curl -X POST <%= links_url(format: :json) %> \
+  -H "Authorization: Bearer <%= @user.api_token %>" \
+  -H "Content-Type: application/json" \
+  -d '{"link": {"title": "Example", "url": "https://example.com", "tag_names": "test"}}'</code></pre>
+      </div>
+
+      <div class="form-field">
+        <h4>JSON Parameters</h4>
+        <ul class="api-params">
+          <li><code>title</code> (required) - The link title</li>
+          <li><code>url</code> (required) - The URL to bookmark</li>
+          <li><code>comment</code> (optional) - Your notes about the link</li>
+          <li><code>tag_names</code> (optional) - Comma-separated tags</li>
+          <li><code>bookmarked_at</code> (optional) - Date/time saved (defaults to now)</li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="form-actions">
+      <%= button_to "Reset Token", reset_token_profile_path, method: :post, class: "btn btn--danger",
+          data: { turbo_confirm: "This will invalidate your current token. Continue?" } %>
+    </div>
+  </div>
+</div>
+
+<script>
+function copyToken() {
+  navigator.clipboard.writeText('<%= @user.api_token %>').then(() => {
+    const button = document.querySelector('.api-token-display button');
+    const originalText = button.textContent;
+    button.textContent = 'Copied!';
+    setTimeout(() => { button.textContent = originalText; }, 2000);
+  });
+}
+</script>

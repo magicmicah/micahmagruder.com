@@ -4,7 +4,14 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_rich_text :body
   scope :search, ->(query) {
-    joins(:rich_text_body).where("action_text_rich_texts.body LIKE ? OR title LIKE ?", "%#{query}%", "%#{query}%")
+    if query.downcase.start_with?("tag:")
+      tag_name = query[4..].strip.downcase
+      joins(:tags).where("tags.name ILIKE ?", tag_name).distinct
+    else
+      left_joins(:rich_text_body, :tags)
+        .where("posts.title ILIKE :q OR posts.preview ILIKE :q OR action_text_rich_texts.body ILIKE :q OR tags.name ILIKE :q", q: "%#{query}%")
+        .distinct
+    end
   }
   scope :visible, -> { where(visible: true) }
 

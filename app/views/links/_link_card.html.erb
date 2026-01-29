@@ -1,0 +1,28 @@
+<div class="card link-card" id="<%= dom_id link %>">
+  <div class="link-content">
+    <div class="link-meta">
+      <span class="link-date"><%= link.bookmarked_at.strftime("%b %d, %Y") %></span>
+      <% if link.tags.any? %>
+        <span class="tags">
+          <% link.tags.each do |tag| %>
+            <%= link_to tag.name, tag_path(tag.name) %>
+          <% end %>
+        </span>
+      <% end %>
+    </div>
+    <div class="link-header">
+      <h2 class="link-title">
+        <%= link_to link.title, link.url, target: "_blank", rel: "noopener" %>
+      </h2>
+    </div>
+    <% if link.comment.present? %>
+      <p class="link-comment"><%= link.comment %></p>
+    <% end %>
+
+    <div class="link-actions">
+      <% if authenticated? %>
+        <%= link_to "Edit", edit_link_path(link), class: "read-more" %>
+      <% end %>
+    </div>
+  </div>
+</div>

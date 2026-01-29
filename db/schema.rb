@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_23_035501) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_28_234643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,27 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_23_035501) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "link_tags", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id", "tag_id"], name: "index_link_tags_on_link_id_and_tag_id", unique: true
+    t.index ["link_id"], name: "index_link_tags_on_link_id"
+    t.index ["tag_id"], name: "index_link_tags_on_tag_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url", null: false
+    t.text "comment"
+    t.datetime "bookmarked_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bookmarked_at"], name: "index_links_on_bookmarked_at"
+    t.index ["url"], name: "index_links_on_url"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -222,11 +243,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_23_035501) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "api_token"
+    t.index ["api_token"], name: "index_users_on_api_token", unique: true
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "link_tags", "links"
+  add_foreign_key "link_tags", "tags"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "sessions", "users"
