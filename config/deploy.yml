@@ -22,9 +22,9 @@ proxy:
   hosts:
     - www.micahmagruder.com
     - micahmagruder.com
-  run:
-    http_port: 4080
-    https_port: 4443
+run:
+  http_port: 4080
+  https_port: 4443
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
