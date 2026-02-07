@@ -23,6 +23,7 @@ proxy:
     - www.micahmagruder.com
     - micahmagruder.com
     - magicmicah.net
+    - www.magicmicah.net
 
 # Credentials for your image host.
 registry:
