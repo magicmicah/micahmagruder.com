@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  PREVIEW_LENGTH = 200
+
   after_validation :set_slug, only: [ :create, :update ]
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
@@ -9,14 +11,13 @@ class Post < ApplicationRecord
       joins(:tags).where("tags.name ILIKE ?", tag_name).distinct
     else
       left_joins(:rich_text_body, :tags)
-        .where("posts.title ILIKE :q OR posts.preview ILIKE :q OR action_text_rich_texts.body ILIKE :q OR tags.name ILIKE :q", q: "%#{query}%")
+        .where("posts.title ILIKE :q OR action_text_rich_texts.body ILIKE :q OR tags.name ILIKE :q", q: "%#{query}%")
         .distinct
     end
   }
   scope :visible, -> { where(visible: true) }
 
   validates :title, presence: true, length: { maximum: 250 }
-  validates :preview, presence: true, length: { maximum: 1000 }
   validates :published_on, presence: true
 
 
@@ -42,6 +43,13 @@ class Post < ApplicationRecord
     word_count = body.to_plain_text.split.size
     minutes = (word_count / words_per_minute.to_f).ceil
     minutes < 1 ? "1 min read" : "#{minutes} min read"
+  end
+
+  def content_preview(length = PREVIEW_LENGTH)
+    text = body.to_plain_text.squish
+    return text if text.length <= length
+
+    "#{text[0, length].rstrip}..."
   end
 
   private

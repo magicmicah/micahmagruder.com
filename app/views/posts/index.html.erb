@@ -30,7 +30,7 @@
           <div class="card">
             <div class="post-content">
               <%= render post %>
-              <%= post.preview %>
+              <%= post.content_preview %>
               <%= link_to "Read more", post_path(post), class: "read-more" %>
             </div>
           </div>
@@ -45,7 +45,7 @@
         <div class="card">
           <div class="post-content">
             <%= render post %>
-            <%= post.preview %>
+            <%= post.content_preview %>
             <%= link_to "Read more", post_path(post), class: "read-more" %>
           </div>
         </div>

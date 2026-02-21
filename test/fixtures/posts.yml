@@ -2,12 +2,10 @@
 
 one:
   title: Visible Title
-  preview: Preview
   visible: true
   published_on: 2025-01-01
 
 two:
   title: Not Visible Title
-  preview: Preview
   visible: false
   published_on: 2025-01-01

@@ -21,7 +21,6 @@ user.generate_api_token!
   color2 = Faker::Color.color_name
   post = Post.create!(
     title: Faker::Book.title,
-    preview: jack_handey,
     published_on: Faker::Date.backward(days: 60),
     visible: rand < 0.67, # We only want 2/3 of the pages to be disible.
     tag_names: "#{color1}, #{color2}"
