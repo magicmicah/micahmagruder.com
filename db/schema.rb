@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_28_234643) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_21_201500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,12 +73,29 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_28_234643) do
     t.index ["url"], name: "index_links_on_url"
   end
 
+  create_table "media", force: :cascade do |t|
+    t.string "title"
+    t.string "alt_text"
+    t.text "caption"
+    t.string "content_type"
+    t.bigint "file_size"
+    t.integer "width"
+    t.integer "height"
+    t.datetime "uploaded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "exif_stripped", default: false, null: false
+    t.index ["content_type"], name: "index_media_on_content_type"
+    t.index ["uploaded_at"], name: "index_media_on_uploaded_at"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "show_in_nav", default: false, null: false
+    t.text "content_html"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
@@ -97,8 +114,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_28_234643) do
     t.date "published_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "preview"
     t.string "slug"
+    t.text "body_html"
   end
 
   create_table "sessions", force: :cascade do |t|

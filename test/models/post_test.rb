@@ -16,11 +16,6 @@ class PostTest < ActiveSupport::TestCase
     assert @post2.title = "Invisible Title"
   end
 
-  test "preview should be present" do
-    assert @post1.preview = "Preview"
-    assert @post2.preview = "Preview"
-  end
-
   test "published_on should be present" do
     assert @post1.published_on = "2025-01-01"
     assert @post2.published_on = "2025-01-01"
@@ -50,5 +45,15 @@ class PostTest < ActiveSupport::TestCase
     # 250 words should be 2 min (rounds up from 1.25)
     @post1.body = "word " * 250
     assert_equal "2 min read", @post1.reading_time
+  end
+
+  test "content_preview returns plain text excerpt" do
+    @post1.body = "<p>Hello <strong>world</strong></p>"
+    assert_equal "Hello world", @post1.content_preview
+  end
+
+  test "content_preview truncates long text" do
+    @post1.body = "a" * 210
+    assert_equal ("a" * 200) + "...", @post1.content_preview
   end
 end
