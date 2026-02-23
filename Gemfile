@@ -65,6 +65,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "loofah", "~> 2.24"
+gem "loofah", "~> 2.25"
 gem "kaminari"
 gem "feedjira"
