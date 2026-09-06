@@ -3,6 +3,12 @@ name: Kamal Deploy
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for running this workflow'
+        required: true
+        default: 'Manual trigger'
 
 jobs:
   deploy:
